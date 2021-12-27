@@ -10,7 +10,7 @@
   * [Project对象](api/api_project.md)
   * [Folder对象](api/api_folder.md)
   * [MediaPool对象](api/api_media_pool.md)
-  * [MediaPoolItems对象](api/api_media_pool_items.md)
+  * [MediaPoolItem对象](api/api_media_pool_item.md)
   * [Timeline对象](api/api_timeline.md)
   * [TimelineItem对象](api/api_timeline_item.md)
   * [Gallery对象](api/api_gallery.md)
