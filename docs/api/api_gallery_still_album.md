@@ -1,0 +1,1 @@
+# GalleryStillAlbum对象

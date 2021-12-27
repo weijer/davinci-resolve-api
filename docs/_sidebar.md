@@ -1,6 +1,20 @@
 <!-- docs/_sidebar.md -->
 
 * [概述](/)
-* [API说明](/api)
+* API
+  * [说明](api/api)
+  * [Resolve对象](api/api_resolve.md)
+  * [Fusion对象](api/api_fusion.md)
+  * [MediaStorage对象](api/api_media_storage.md)
+  * [ProjectManager对象](api/api_project_manager.md)
+  * [Project对象](api/api_project.md)
+  * [Folder对象](api/api_folder.md)
+  * [MediaPool对象](api/api_media_pool.md)
+  * [MediaPoolItems对象](api/api_media_pool_items.md)
+  * [Timeline对象](api/api_timeline.md)
+  * [TimelineItem对象](api/api_timeline_item.md)
+  * [Gallery对象](api/api_gallery.md)
+  * [GalleryStillAlbum对象](api/api_gallery_still_album.md)
+  * [GalleryStill对象](api/api_gallery_still.md)
 * [Python示例](/python)
 * [Node.js示例](/nodejs)
