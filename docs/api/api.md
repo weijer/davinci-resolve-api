@@ -193,6 +193,7 @@ const WorkflowIntegration = require('./WorkflowIntegration.node');
 │   ├── main.js                    入口文件
 │   ├── index.html                 html 文件
 │   ├── manifest.xml               插件xml描述文件
+│   ├── WorkflowIntegration.node   WorkflowIntegration node.js 模块
 │   ├── node_modules               第三方npm包
 │   │   └── <Node.js modules>
 │   ├── js                         js 文件
