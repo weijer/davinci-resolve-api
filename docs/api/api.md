@@ -20,7 +20,9 @@
 | GalleryStillAlbum | 画廊静帧专辑对象                     | Gallery.GetCurrentStillAlbum() <br/>   Gallery.GetGalleryStillAlbums()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | Folder | 文件夹操作对象                      | MediaPool.GetRootFolder()   <br/> MediaPool.AddSubFolder(folder, name)  <br/>  MediaPool.GetCurrentFolder()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
-## 加载 fusionscript 文件
+## python脚本获取 Resolve 对象
+
+### 加载 fusionscript 文件
 
 默认获取读取 RESOLVE_SCRIPT_LIB 系统环境变量，如果没有配置环境变量则会按照下面默认路径去加载：
 
@@ -71,6 +73,7 @@ else:
 ```
 
 **python3.5以上版本示例**
+
 ```python
 import sys
 from importlib import machinery
@@ -121,7 +124,7 @@ else:
     raise ImportError("Could not locate module dependencies")
 ```
 
-## 获取 Resolve 对象
+### 获取 Resolve 对象
 
 ```python
 import DaVinciResolveScript as dvr_script
@@ -129,7 +132,85 @@ import DaVinciResolveScript as dvr_script
 resolve = dvr_script.scriptapp("Resolve")
 ```
 
+## node.js 脚本获取 Resolve 对象
 
+当前以 windows 环境为例，其他操作系统去 xxx\DaVinci Resolve\Support\Developer\Workflow Integrations\Examples\SamplePlugin 目录下找对应文件
 
+### WorkflowIntegration module API
 
+js要与Resolve交互，需要在你的js插件应用中使用 WorkflowIntegration.node Node.js 模块。 下面是与Resolve通信的WorkflowIntegration（模块）JavaScript API函数。
 
+```javascript
+const WorkflowIntegration = require('./WorkflowIntegration.node');
+```
+
+| 方法名                                      | 返回类型     | 说明                                                                                                                                |
+|------------------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------|
+| WorkflowIntegration.Initialize(pluginId) | Bool     | 如果初始化成功，则返回true，否则返回false。 pluginId 是从 manifest.xml 配置文件中读取的插件唯一 Id 字符串                                                           |
+| WorkflowIntegration.GetResolve()         | Resolve  | 获取返回 Resolve 对象                                                                                                                   |
+| WorkflowIntegration.RegisterCallback(callbackName, callbackFunc) | Bool | 如果输入回调名称/函数注册成功，则返回true，否则返回false </br>  callbackName 应为有效的支持回调字符串名称（具体请看下方支持回调函数列表）  </br> callbackFunc 应该是没有任何参数的有效JavaScript函数 |
+| WorkflowIntegration.DeregisterCallback(callbackName) |Bool| 如果成功取消注册输入回调名称，则返回true，否则返回false                                                                                                  |
+| WorkflowIntegration.CleanUp() |Bool| 如果清除成功，则返回true，否则返回false。这应该在插件应用程序退出时调用。                                                                                         |
+| WorkflowIntegration.SetAPITimeout(valueInSecs)  |Bool| 默认情况下API不会超时。要启用超时，请在参数 valueInsenses 中设置一个非零正整数值。 </br>  将其设置为0将禁用超时。如果超时设置/重置成功，此函数将返回true。                                     |
+
+### 支持回调函数列表
+
+请注意，JavaScript API没有基于控制台的支持。
+
+| 函数名 |
+|-----|
+|RenderStart|
+|RenderStop|
+
+### manifest.xml 配置文件
+
+| 参数节点 | 说明       |
+|-----|----------|
+|Id| 插件唯一标识id |
+|Name| 插件名称     |
+|Version | 插件版本     |
+|Description| 插件描述     |
+|FilePath| js主入口文件  |
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<BlackmagicDesign>
+    <Plugin>
+        <Id>com.blackmagicdesign.resolve.sampleplugin</Id>
+        <Name>Sample Plugin</Name>
+        <Version>1.0</Version>
+        <Description>Sample Plugin</Description>
+        <FilePath>main.js</FilePath>
+    </Plugin>
+</BlackmagicDesign>
+```
+### Workflow Integration Plugins 插件文件目录结构
+
+```
+.
+├── com.<company>.<plugin_name>    插件目录
+│   ├── package.json               包信息
+│   ├── main.js                    入口文件
+│   ├── index.html                 html 文件
+│   ├── manifest.xml               插件xml描述文件
+│   ├── node_modules               第三方npm包
+│   │   └── <Node.js modules>
+│   ├── js                         js 文件
+│   │   └── <supporting js files>
+│   ├── css                        css 文件
+│   │   └──  <css files containing styling info>
+│   ├── img                        img 图片资源文件
+│   │   └──  <image files>
+......
+```
+
+### 加载 Resolve 对象
+
+```javascript
+const WorkflowIntegration = require('./WorkflowIntegration.node');
+isInitialized = WorkflowIntegration.Initialize('com.blackmagicdesign.resolve.sampleplugin');
+if (isInitialized) {
+    resolve = WorkflowIntegration.GetResolve();
+    resolve.GetProjectManager().CreateProject("Hello World");
+}
+```
