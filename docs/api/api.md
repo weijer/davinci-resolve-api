@@ -19,3 +19,117 @@
 | GalleryStill | 画廊静帧对象                       | Timeline.GrabStill() <br/> Timeline.GrabAllStills(stillFrameSource)  <br/> Timeline.GetStills()                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | GalleryStillAlbum | 画廊静帧专辑对象                     | Gallery.GetCurrentStillAlbum() <br/>   Gallery.GetGalleryStillAlbums()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | Folder | 文件夹操作对象                      | MediaPool.GetRootFolder()   <br/> MediaPool.AddSubFolder(folder, name)  <br/>  MediaPool.GetCurrentFolder()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+
+## 加载 fusionscript 文件
+
+默认获取读取 RESOLVE_SCRIPT_LIB 系统环境变量，如果没有配置环境变量则会按照下面默认路径去加载：
+
+> 当然你可以手动直接指认你当前 fusionscript 文件来得到 Resolve 模块
+
+### DaVinciResolveScript.py 源码
+
+**python2.x示例**
+
+```python
+import sys
+import imp
+
+script_module = None
+try:
+    import fusionscript as script_module
+except ImportError:
+    # Look for installer based environment variables:
+    import os
+
+    lib_path = os.getenv("RESOLVE_SCRIPT_LIB")
+    if lib_path:
+        try:
+            script_module = imp.load_dynamic("fusionscript", lib_path)
+        except ImportError:
+            pass
+    if not script_module:
+        # Look for default install locations:
+        ext = ".so"
+        if sys.platform.startswith("darwin"):
+            path = "/Applications/DaVinci Resolve/DaVinci Resolve.app/Contents/Libraries/Fusion/"
+        elif sys.platform.startswith("win") or sys.platform.startswith("cygwin"):
+            ext = ".dll"
+            path = "C:\\Program Files\\Blackmagic Design\\DaVinci Resolve\\"
+        elif sys.platform.startswith("linux"):
+            path = "/opt/resolve/libs/Fusion/"
+
+        try:
+            script_module = imp.load_dynamic("fusionscript", path + "fusionscript" + ext)
+        except ImportError:
+            pass
+
+if script_module:
+    sys.modules[__name__] = script_module
+else:
+    raise ImportError("Could not locate module dependencies")
+
+```
+
+**python3.5以上版本示例**
+```python
+import sys
+from importlib import machinery
+
+
+def load_dynamic(name, file_path):
+    """
+    Load an extension module.
+    """
+    loader = machinery.ExtensionFileLoader(name, file_path)
+    spec = machinery.ModuleSpec(name=name, loader=loader, origin=file_path)
+    return loader.create_module(spec)
+
+
+script_module = None
+try:
+    import fusionscript as script_module
+except ImportError:
+    # Look for installer based environment variables:
+    import os
+
+    lib_path = os.getenv("RESOLVE_SCRIPT_LIB")
+
+    if lib_path:
+        try:
+            script_module = load_dynamic("fusionscript", lib_path)
+        except ImportError:
+            pass
+    if not script_module:
+        # Look for default install locations:
+        ext = ".so"
+        if sys.platform.startswith("darwin"):
+            path = "/Applications/DaVinci Resolve/DaVinci Resolve.app/Contents/Libraries/Fusion/"
+        elif sys.platform.startswith("win") or sys.platform.startswith("cygwin"):
+            ext = ".dll"
+            path = "C:\\Program Files\\Blackmagic Design\\DaVinci Resolve\\"
+        elif sys.platform.startswith("linux"):
+            path = "/opt/resolve/libs/Fusion/"
+
+        try:
+            script_module = load_dynamic("fusionscript", path + "fusionscript" + ext)
+        except ImportError:
+            pass
+
+if script_module:
+    sys.modules[__name__] = script_module
+else:
+    raise ImportError("Could not locate module dependencies")
+```
+
+## 获取 Resolve 对象
+
+```python
+import DaVinciResolveScript as dvr_script
+
+resolve = dvr_script.scriptapp("Resolve")
+```
+
+
+
+
+

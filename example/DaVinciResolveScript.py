@@ -1,5 +1,15 @@
 import sys
-import imp
+from importlib import machinery
+
+
+def load_dynamic(name, file_path):
+    """
+    Load an extension module.
+    """
+    loader = machinery.ExtensionFileLoader(name, file_path)
+    spec = machinery.ModuleSpec(name=name, loader=loader, origin=file_path)
+    return loader.create_module(spec)
+
 
 script_module = None
 try:
@@ -9,9 +19,10 @@ except ImportError:
     import os
 
     lib_path = os.getenv("RESOLVE_SCRIPT_LIB")
+
     if lib_path:
         try:
-            script_module = imp.load_dynamic("fusionscript", lib_path)
+            script_module = load_dynamic("fusionscript", lib_path)
         except ImportError:
             pass
     if not script_module:
@@ -26,7 +37,7 @@ except ImportError:
             path = "/opt/resolve/libs/Fusion/"
 
         try:
-            script_module = imp.load_dynamic("fusionscript", path + "fusionscript" + ext)
+            script_module = load_dynamic("fusionscript", path + "fusionscript" + ext)
         except ImportError:
             pass
 
