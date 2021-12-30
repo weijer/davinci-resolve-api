@@ -213,3 +213,17 @@ if (isInitialized) {
     resolve = WorkflowIntegration.GetResolve();
 }
 ```
+
+## UI 组件
+
+DaVinci Resolve 有三种写UI方式：
+
+1. html+css 基于内置的 Electron 模块运行（类似微信小程序玩法了）
+2. fusion.UIManager 内置提供了 fusion UI 组件
+3. 使用第三方 PyQt（PySide）ui 组件
+
+> 不推荐 fusion UI 组件，因为软件之间不通用直接 pass，感兴趣的自行去看官方文档
+> 
+> 至于 html+css 还是用 QT 来写 ui 看你司的人员技术实力
+> 
+> 个人更推荐使用 html+css 这种模式，在 vue.js 加持下写页面非常快，人员成本也相对较低
