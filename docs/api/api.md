@@ -136,6 +136,16 @@ resolve = dvr_script.scriptapp("Resolve")
 
 当前以 windows 环境为例，其他操作系统去 xxx\DaVinci Resolve\Support\Developer\Workflow Integrations\Examples\SamplePlugin 目录下找对应文件
 
+> 调用 WorkflowIntegration.node 模块，代码无法脱离 DaVinci Resolve 对立运行，必须放在
+> 
+>  Mac OS X:
+> 
+>  "/Library/Application Support/Blackmagic Design/DaVinci Resolve/Workflow Integration Plugins/"
+> 
+>  Windows:
+> 
+>  "%PROGRAMDATA%\Blackmagic Design\DaVinci Resolve\Support\Workflow Integration Plugins\"
+
 ### WorkflowIntegration module API
 
 js要与Resolve交互，需要在你的js插件应用中使用 WorkflowIntegration.node Node.js 模块。 下面是与Resolve通信的WorkflowIntegration（模块）JavaScript API函数。
