@@ -132,6 +132,8 @@ product_version_string = resolve.GetVersionString()
 
 从名为“presetName”的已保存预设加载UI布局。
 
+![layout_preset](./../images/layout_preset.png)
+
 ```python
 import DaVinciResolveScript as dvr_script
 
