@@ -96,7 +96,7 @@ fusion = resolve.Fusion()
 
 将当前UI布局保存为名为“presetName”的预设。
 
-## ImportLayoutPreset(presetFilePath, presetName)
+## Resolve.ImportLayoutPreset(presetFilePath, presetName)
 
 - 返回 Bool
 
