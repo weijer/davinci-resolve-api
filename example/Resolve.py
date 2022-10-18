@@ -216,21 +216,51 @@ timeline_name = timeline.GetName()
 
 # res = timeline.SetName("timeline_new_name")
 
-start_frame_number = timeline.GetStartFrame()
-end_frame_number = timeline.GetEndFrame()
+# start_frame_number = timeline.GetStartFrame()
+# end_frame_number = timeline.GetEndFrame()
+#
+# audio_track_count = timeline.GetTrackCount("audio")
+# video_track_count = timeline.GetTrackCount("video")
+# subtitle_track_count = timeline.GetTrackCount("subtitle")
+#
+# first_video_track_items = timeline.GetItemListInTrack("video", 1)
+# if first_video_track_items is not None:
+#     for item in first_video_track_items:
+#         print(item.GetName())
 
-audio_track_count = timeline.GetTrackCount("audio")
-video_track_count = timeline.GetTrackCount("video")
-subtitle_track_count = timeline.GetTrackCount("subtitle")
+# data = [{'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}]
+# json_str = json.dumps(data)
+# res = timeline.AddMarker(100.0, "Sky", "marker_name", "marker_note", 100.0, json_str)
 
-first_video_track_items = timeline.GetItemListInTrack("video", 1)
-if first_video_track_items is not None:
-    for item in first_video_track_items:
-        print(item.GetName())
+# res = timeline.AddMarker(220.0, "Red", "marker_name3", "marker_note3", 220.0, "test_tag2")
+# markers = timeline.GetMarkers()
+# markers_custom = timeline.GetMarkerByCustomData("test_tag2")
 
-data = [{'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}]
-json_str = json.dumps(data)
-res = timeline.AddMarker(100.0, "Sky", "marker_name", "marker_note", 100.0, json_str)
+# data = [{'id': 111, 'assets': 'long', 'time_log': 3}]
+# json_str = json.dumps(data)
+# res = timeline.UpdateMarkerCustomData(220.0, json_str)
 
-markers = timeline.GetMarkers()
-print(markers)
+# customData = timeline.GetMarkerCustomData(220.0)
+# res = timeline.DeleteMarkersByColor("All")
+# res = timeline.AddMarker(100.0, "Sky", "marker_name", "marker_note", 100.0)
+# res = timeline.DeleteMarkerAtFrame(100.0)
+# current_timeline_code = timeline.GetCurrentTimecode()
+# res = timeline.SetCurrentTimecode("01:00:20:00")
+# current_video_item = timeline.GetCurrentVideoItem()
+# current_clipThumbnail = timeline.GetCurrentClipThumbnailImage()
+# res = timeline.SetTrackName("video", 1, "新视频")
+# track_name = timeline.GetTrackName("video", 1)
+
+# new_timeline = timeline.DuplicateTimeline()
+
+# res = timeline.Export("D:/dafenqi/test_export/test_py_rename2.aaf", resolve.EXPORT_AAF, resolve.EXPORT_AAF_NEW)
+
+# res = timeline.SetSetting("timelineFrameRate", "25")
+# timeline_rate = timeline.GetSetting("timelineFrameRate")
+
+# timeline_item = timeline.InsertGeneratorIntoTimeline("10 Step")
+
+# timeline_item = timeline.InsertTitleIntoTimeline("Scroll")
+
+gallery_still = timeline.GrabStill()
+print(gallery_still)
