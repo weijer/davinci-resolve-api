@@ -214,6 +214,8 @@ project = project_manager.GetCurrentProject()
 timeline = project.GetCurrentTimeline()
 timeline_name = timeline.GetName()
 
+# print(timeline_name)
+
 # res = timeline.SetName("timeline_new_name")
 
 # start_frame_number = timeline.GetStartFrame()
@@ -242,7 +244,8 @@ timeline_name = timeline.GetName()
 
 # customData = timeline.GetMarkerCustomData(220.0)
 # res = timeline.DeleteMarkersByColor("All")
-# res = timeline.AddMarker(100.0, "Sky", "marker_name", "marker_note", 100.0)
+# res = timeline.AddMarker(200.0, "Sky", "marker_name", "marker_note", 200.0)
+# print(res)
 # res = timeline.DeleteMarkerAtFrame(100.0)
 # current_timeline_code = timeline.GetCurrentTimecode()
 # res = timeline.SetCurrentTimecode("01:00:20:00")
@@ -262,5 +265,32 @@ timeline_name = timeline.GetName()
 
 # timeline_item = timeline.InsertTitleIntoTimeline("Scroll")
 
-gallery_still = timeline.GrabStill()
-print(gallery_still)
+# gallery_still = timeline.GrabStill()
+
+media_pool = project.GetMediaPool()
+media_pool_items = media_pool.ImportMedia(["E:\\DaVinci\\add_media\\test_add2.mov"])
+
+for media_pool_item in media_pool_items:
+    # metadata = media_pool_item.GetMetadata("Keywords")
+    # res = media_pool_item.SetMetadata({'Keywords': 'test2,test4'})
+    #media_pool_item_id = media_pool_item.GetMediaId()
+
+    #res = media_pool_item.AddMarker(10.0, "Green", "marker_name", "marker_note", 10.0, "test_custom_data")
+
+    #media_pool_item_markers = media_pool_item.GetMarkers()
+
+    #media_pool_item_marker = media_pool_item.GetMarkerByCustomData("test_custom_data")
+    #res = media_pool_item.UpdateMarkerCustomData(10.0, "test_custom_data2")
+    # media_pool_item_marker = media_pool_item.GetMarkerByCustomData("test_custom_data2")
+
+    # res = media_pool_item.AddFlag("Blue")
+    # color_list = media_pool_item.GetFlagList()
+    # res = media_pool_item.ClearFlags("Blue")
+    # color = media_pool_item.GetClipColor()
+    # res = media_pool_item.SetClipColor("Lime")
+    # res = media_pool_item.ClearClipColor()
+    # item_property = media_pool_item.GetClipProperty()
+
+    res = media_pool_item.ReplaceClip("E:\\DaVinci\\add_media\\test_add.mov")
+    print(res)
+
