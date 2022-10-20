@@ -267,10 +267,10 @@ timeline_name = timeline.GetName()
 
 # gallery_still = timeline.GrabStill()
 
-media_pool = project.GetMediaPool()
-media_pool_items = media_pool.ImportMedia(["E:\\DaVinci\\add_media\\test_add2.mov"])
-
-for media_pool_item in media_pool_items:
+# media_pool = project.GetMediaPool()
+# media_pool_items = media_pool.ImportMedia(["E:\\DaVinci\\add_media\\test_add2.mov"])
+#
+# for media_pool_item in media_pool_items:
     # metadata = media_pool_item.GetMetadata("Keywords")
     # res = media_pool_item.SetMetadata({'Keywords': 'test2,test4'})
     #media_pool_item_id = media_pool_item.GetMediaId()
@@ -291,6 +291,14 @@ for media_pool_item in media_pool_items:
     # res = media_pool_item.ClearClipColor()
     # item_property = media_pool_item.GetClipProperty()
 
-    res = media_pool_item.ReplaceClip("E:\\DaVinci\\add_media\\test_add.mov")
-    print(res)
+    # res = media_pool_item.ReplaceClip("E:\\DaVinci\\add_media\\test_add.mov")
+    # print(res)
+
+# 获取Gallery对象
+gallery = project.GetGallery()
+gallery_still_album = gallery.GetCurrentStillAlbum()
+# album_name = gallery.GetAlbumName(gallery_still_album)
+
+res = gallery.SetAlbumName(gallery_still_album, "test_album_name")
+print(res)
 
