@@ -299,6 +299,13 @@ gallery = project.GetGallery()
 gallery_still_album = gallery.GetCurrentStillAlbum()
 # album_name = gallery.GetAlbumName(gallery_still_album)
 
-res = gallery.SetAlbumName(gallery_still_album, "test_album_name")
-print(res)
+# res = gallery.SetAlbumName(gallery_still_album, "test_album_name")
+
+gallery_stills = gallery_still_album.GetStills()
+for gallery_still in gallery_stills:
+    label = gallery_still_album.GetLabel(gallery_still)
+    res = gallery_still_album.SetLabel(gallery_still, "test_new_label")
+    print(res)
+
+res = gallery_still_album.ExportStills(gallery_stills, "E:\\DaVinci\\add_media", "to_", "jpg")
 
