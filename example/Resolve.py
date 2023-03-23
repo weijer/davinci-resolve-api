@@ -317,7 +317,20 @@ video_track_items = timeline.GetItemListInTrack('video', 2)
 
 for item in video_track_items:
     # 返回当前片段相对于媒体的起点帧数
-    print(item.GetLeftOffset())
+    item.GetLeftOffset()
     # 返回当前片段相对于媒体的结束帧数
-    print(item.GetRightOffset())
+    item.GetRightOffset()
 
+
+timeline_item = timeline.GetCurrentVideoItem()
+if timeline_item is not None:
+    item_name = timeline_item.GetName()
+    item_duration = timeline_item.GetDuration()
+    item_end_frame = timeline_item.GetEnd()
+    fusion_comp_count = timeline_item.GetFusionCompCount()
+    item_left_offset = timeline_item.GetLeftOffset()
+    item_right_offset = timeline_item.GetRightOffset()
+    item_start_frame = timeline_item.GetStart()
+
+
+    print(item_start_frame)
