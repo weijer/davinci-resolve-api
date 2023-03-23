@@ -317,9 +317,12 @@ video_track_items = timeline.GetItemListInTrack('video', 2)
 
 for item in video_track_items:
     # 返回当前片段相对于媒体的起点帧数
-    item.GetLeftOffset()
+    l_offset = item.GetLeftOffset()
     # 返回当前片段相对于媒体的结束帧数
-    item.GetRightOffset()
+    r_offset = item.GetRightOffset()
+
+    # print(l_offset)
+    # print(r_offset)
 
 
 timeline_item = timeline.GetCurrentVideoItem()
@@ -332,5 +335,14 @@ if timeline_item is not None:
     item_right_offset = timeline_item.GetRightOffset()
     item_start_frame = timeline_item.GetStart()
 
+    # timeline_item.SetProperty('Pan', -4.0)
+    # pan_val = timeline_item.GetProperty('Pan')
 
-    print(item_start_frame)
+    # timeline_item.SetProperty('Tilt', -4.0)
+    # tilt_val = timeline_item.GetProperty('Tilt')
+
+    # timeline_item.SetProperty('ZoomY', 1)
+    # zoomx_val = timeline_item.GetProperty('ZoomY')
+
+    # timeline_item.SetProperty('CropLeft', 0)
+    # zoom_gang_val = timeline_item.GetProperty('DynamicZoomEase')
