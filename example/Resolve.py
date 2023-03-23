@@ -295,17 +295,29 @@ timeline_name = timeline.GetName()
     # print(res)
 
 # 获取Gallery对象
-gallery = project.GetGallery()
-gallery_still_album = gallery.GetCurrentStillAlbum()
-# album_name = gallery.GetAlbumName(gallery_still_album)
+# gallery = project.GetGallery()
+# gallery_still_album = gallery.GetCurrentStillAlbum()
+# # album_name = gallery.GetAlbumName(gallery_still_album)
+#
+# # res = gallery.SetAlbumName(gallery_still_album, "test_album_name")
+#
+# gallery_stills = gallery_still_album.GetStills()
+# for gallery_still in gallery_stills:
+#     label = gallery_still_album.GetLabel(gallery_still)
+#     res = gallery_still_album.SetLabel(gallery_still, "test_new_label")
+#     print(res)
+#
+# res = gallery_still_album.ExportStills(gallery_stills, "E:\\DaVinci\\add_media", "to_", "jpg")
 
-# res = gallery.SetAlbumName(gallery_still_album, "test_album_name")
+# 获取当前时间线video类型的轨道数量
+track_count = timeline.GetTrackCount('video')
 
-gallery_stills = gallery_still_album.GetStills()
-for gallery_still in gallery_stills:
-    label = gallery_still_album.GetLabel(gallery_still)
-    res = gallery_still_album.SetLabel(gallery_still, "test_new_label")
-    print(res)
+# 按索引选择指定的视频轨
+video_track_items = timeline.GetItemListInTrack('video', 2)
 
-res = gallery_still_album.ExportStills(gallery_stills, "E:\\DaVinci\\add_media", "to_", "jpg")
+for item in video_track_items:
+    # 返回当前片段相对于媒体的起点帧数
+    print(item.GetLeftOffset())
+    # 返回当前片段相对于媒体的结束帧数
+    print(item.GetRightOffset())
 

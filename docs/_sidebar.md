@@ -12,7 +12,7 @@
   * [MediaPool对象](api/api_media_pool.md)
   * [MediaPoolItem对象](api/api_media_pool_item.md)
   * [Timeline对象](api/api_timeline.md)
-  * [TimelineItem对象](api/api_timeline_item.md)
+  * [TimelineItem对象](api/api_timeline_item .md)
   * [Gallery对象](api/api_gallery.md)
   * [GalleryStillAlbum对象](api/api_gallery_still_album.md)
   * [GalleryStill对象](api/api_gallery_still.md)
